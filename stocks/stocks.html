@@ -1,0 +1,33 @@
+<html>
+<head>
+<script src="../jquery.js"></script>
+<script>
+$(document).ready(function(){
+	data_gen();
+	setInterval(data_gen, 3000);	
+});
+
+var data_gen = function() {
+	$.getJSON("data.php", data_callback);
+}
+
+var data_callback = function(data) {
+	var html = '';
+	var i = 0;
+	html += '<table border="1">';
+	
+	for(i = 0;i < data.length; i++) {
+		html += '<tr><td>'+ data[i][0] +'</td>';
+		html += '<td>'+ data[i][1] +'</td></tr>';
+	}
+	html += '</table>';
+
+	$('#stocks').html(html);
+
+}
+</script>
+</head>
+<body>
+<div id="stocks"></div>
+</body>
+</html>
